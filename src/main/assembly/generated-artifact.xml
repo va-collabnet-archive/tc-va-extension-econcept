@@ -1,0 +1,15 @@
+<assembly>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.directory}/generated-artifact/</directory>
+			<includes>
+				<include>sct-va-extension.jbin</include>
+			</includes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+	<includeBaseDirectory>false</includeBaseDirectory>
+</assembly>

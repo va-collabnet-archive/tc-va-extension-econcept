@@ -1,0 +1,179 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.ihtsdo</groupId>
+		<artifactId>ihtsdo-parent</artifactId>
+		<version>1</version>
+	</parent>
+	
+	<groupId>gov.va.oia.terminology.converters</groupId>
+	<artifactId>va-extension-econcept</artifactId>
+	<!-- this should be set to ${sourceData.version}-loader-[version] but that doesn't appease the maven gods that know best.... -->
+	<version>3.4-prod-1.0-loader-1.0-SNAPSHOT</version>
+	
+	<packaging>pom</packaging>
+	<name>va-extension-econcept</name>
+
+	<properties>
+		<sourceData.version>3.4-prod-1.0</sourceData.version>
+		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30-SNAPSHOT</org.ihtsdo.wb-toolkit.version>
+		<data.relativeInputDir>/SnomedCT_Release_US1000161_20140131/RF2Release/Full/</data.relativeInputDir>
+		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->  
+		<import.module.uuid>fd8fe531-eda8-576f-b75b-79735529798e</import.module.uuid> <!-- VA maintained module (core metadata concept) -->
+		<core.path.uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</core.path.uuid> <!-- SNOMED Core Path -->
+		<core.module.uuid>1b4f1ba5-b725-390f-8c3b-33ec7096bdca</core.module.uuid> <!-- SNOMED Core Module -->
+	</properties>
+	
+	<scm>
+		<connection>scm:svn:https://csfe.aceworkspace.net/svn/repos/va-oia-terminology-converters/va-extension-econcept/trunk/</connection>
+		<developerConnection>scm:svn:https://csfe.aceworkspace.net/svn/repos/va-oia-terminology-converters/va-extension-econcept/trunk/</developerConnection>
+		<url>https://csfe.aceworkspace.net/integration/viewvc/viewvc.cgi/va-extension-econcept/trunk/?root=va-oia-terminology-converters&amp;system=exsy1002</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<!-- Get VA Extension source file from archiva -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>fetch-va-extension-src-data</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>gov.va.jif.all-va-sources-wb</groupId>
+									<artifactId>content-processing-rf2</artifactId>
+									<version>${sourceData.version}</version>
+									<classifier>release-files</classifier>
+									<type>zip</type>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/generated-resources/data</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.ihtsdo</groupId>
+				<artifactId>wb-mojo</artifactId>
+				<version>${org.ihtsdo.wb-toolkit.version}</version>
+				<executions>
+					<execution>
+						<id>sct2-create-placeholder-concepts</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct2-create-placeholder-concepts</goal>
+						</goals>
+						<configuration>
+							<targetSubDir>generated-resources/data</targetSubDir>
+							<effectiveDate>2015-01-31 00:00:00</effectiveDate>
+							<rf2Dirs>
+								<rf2Dir>
+									<directoryName>${data.relativeInputDir}/Terminology</directoryName>
+								</rf2Dir>
+								<rf2Dir>
+									<directoryName>${data.relativeInputDir}/Refset</directoryName>
+								</rf2Dir>
+							</rf2Dirs>
+							<pathUiud>${core.path.uuid}</pathUiud>
+							<moduleUuid>${core.module.uuid}</moduleUuid>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>sct-rf2-uuid-cache-arf-gen</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct-rf2-uuid-cache-arf-gen</goal>
+						</goals>
+						<configuration>
+							<inputSubDir>generated-resources/data</inputSubDir>
+							<inputSctDir>${data.relativeInputDir}</inputSctDir>
+							<idCacheDir>id-cache</idCacheDir>
+							<outputSubDir>input-files</outputSubDir>
+							<outputArfDir>generated-arf</outputArfDir>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>sct-rf2-to-arf-no-status</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct-rf2-to-arf-no-status</goal>
+						</goals>
+						<configuration>
+							<targetSubDir>generated-resources/data</targetSubDir>
+							<inputDir>${data.relativeInputDir}</inputDir>
+							<pathUuid>${import.path.uuid}</pathUuid>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>sct-rf2-lrs-to-arf</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct-rf2-lrs-to-arf</goal>
+						</goals>
+						<configuration>
+							<targetSubDir>generated-resources/data</targetSubDir>
+							<inputDir>${data.relativeInputDir}/Refset/Language</inputDir>
+							<pathUuid>${import.path.uuid}</pathUuid>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>sct1-arf-to-econcepts</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct1-arf-to-econcepts</goal>
+						</goals>
+						<configuration>
+							<targetSubDir>generated-resources/data</targetSubDir>
+							<outputDirectory>generated-artifact</outputDirectory>
+							<uuidUser>f7495b58-6630-3499-a44e-2052b5fcf06c</uuidUser>
+							<uuidUserSnorocket>7e87cc5b-e85f-3860-99eb-7a44f2b9e6f9</uuidUserSnorocket>
+							<useSctRelId>true</useSctRelId>
+							<rf2Mapping>true</rf2Mapping>
+							<rf2Metadata>true</rf2Metadata>
+							<includeCTV3ID>true</includeCTV3ID>
+							<includeSNOMEDRTID>true</includeSNOMEDRTID>
+							<reportRootConcepts>false</reportRootConcepts>
+							<outputFileName>sct-va-extension.jbin</outputFileName>
+							<sct1Dirs />
+							<arfInputDirs>
+								<param>generated-arf</param>
+							</arfInputDirs>
+							<uuidModule>${import.module.uuid}</uuidModule>
+							<debug>true</debug>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-data</id>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/generated-artifact.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
