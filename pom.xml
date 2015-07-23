@@ -16,7 +16,7 @@
 
 	<properties>
 		<sourceData.version>3.4-prod-1.0</sourceData.version>
-		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30-SNAPSHOT</org.ihtsdo.wb-toolkit.version>
+		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30</org.ihtsdo.wb-toolkit.version>
 		<data.relativeInputDir>/SnomedCT_Release_US1000161_20140131/RF2Release/Full/</data.relativeInputDir>
 		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->  
 		<import.module.uuid>fd8fe531-eda8-576f-b75b-79735529798e</import.module.uuid> <!-- VA maintained module (core metadata concept) -->
