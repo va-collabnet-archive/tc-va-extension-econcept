@@ -126,6 +126,20 @@
 							<pathUuid>${import.path.uuid}</pathUuid>
 						</configuration>
 					</execution>
+					
+					<execution>
+						<id>sct-rf2-refset-c-to-arf</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>sct-rf2-refset-c-to-arf</goal>
+						</goals>
+						<configuration>
+							<targetSubDir>generated-resources/data</targetSubDir>
+							<inputDir>${data.relativeInputDir}/Refset/Content</inputDir>
+							<inputFile>der2_cRefset_VAReactants</inputFile>
+							<pathUuid>${import.path.uuid}</pathUuid>
+						</configuration>
+					</execution>
 
 					<execution>
 						<id>sct1-arf-to-econcepts</id>
