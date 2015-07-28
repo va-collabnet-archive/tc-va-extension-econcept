@@ -9,13 +9,13 @@
 	<groupId>gov.va.oia.terminology.converters</groupId>
 	<artifactId>va-extension-econcept</artifactId>
 	<!-- this should be set to ${sourceData.version}-loader-[version] but that doesn't appease the maven gods that know best.... -->
-	<version>3.4-prod-1.0-loader-1.0-SNAPSHOT</version>
+	<version>3.4-prod-2.0-loader-1.0</version>
 	
 	<packaging>pom</packaging>
 	<name>va-extension-econcept</name>
 
 	<properties>
-		<sourceData.version>3.4-prod-1.0</sourceData.version>
+		<sourceData.version>3.4-prod-2.0</sourceData.version>
 		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30</org.ihtsdo.wb-toolkit.version>
 		<data.relativeInputDir>/SnomedCT_Release_US1000161_20140131/RF2Release/Full/</data.relativeInputDir>
 		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->  
@@ -72,7 +72,7 @@
 						</goals>
 						<configuration>
 							<targetSubDir>generated-resources/data</targetSubDir>
-							<effectiveDate>2015-01-31 00:00:00</effectiveDate>
+							<effectiveDate>2015-08-01 00:00:00</effectiveDate>
 							<rf2Dirs>
 								<rf2Dir>
 									<directoryName>${data.relativeInputDir}/Terminology</directoryName>
