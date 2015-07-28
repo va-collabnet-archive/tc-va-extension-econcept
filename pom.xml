@@ -9,16 +9,19 @@
 	<groupId>gov.va.oia.terminology.converters</groupId>
 	<artifactId>va-extension-econcept</artifactId>
 	<!-- this should be set to ${sourceData.version}-loader-[version] but that doesn't appease the maven gods that know best.... -->
-	<version>3.4-prod-2.0-loader-1.0</version>
+	<version>3.4-prod-2.1-loader-1.0</version>
 	
 	<packaging>pom</packaging>
 	<name>va-extension-econcept</name>
 
 	<properties>
-		<sourceData.version>3.4-prod-2.0</sourceData.version>
+		<sourceData.version>3.4-prod-2.1</sourceData.version>
 		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30</org.ihtsdo.wb-toolkit.version>
 		<data.relativeInputDir>/SnomedCT_Release_US1000161_20140131/RF2Release/Full/</data.relativeInputDir>
-		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->  
+		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->
+		<import.path.description>VHA Extension 2015-05-31</import.path.description>  
+		<!--import.path.uuid>54f51020-ad78-5218-b5af-0e85a747f2a1</import.path.uuid--> <!-- "JIF Terminology Workbench release candidate path" -->
+		<!--import.path.description>JIF Terminology Workbench release candidate path</import.path.description-->
 		<import.module.uuid>fd8fe531-eda8-576f-b75b-79735529798e</import.module.uuid> <!-- VA maintained module (core metadata concept) -->
 		<core.path.uuid>8c230474-9f11-30ce-9cad-185a96fd03a2</core.path.uuid> <!-- SNOMED Core Path -->
 		<core.module.uuid>1b4f1ba5-b725-390f-8c3b-33ec7096bdca</core.module.uuid> <!-- SNOMED Core Module -->
@@ -137,7 +140,10 @@
 							<targetSubDir>generated-resources/data</targetSubDir>
 							<inputDir>${data.relativeInputDir}/Refset/Content</inputDir>
 							<inputFile>der2_cRefset_VAReactants</inputFile>
-							<pathUuid>${import.path.uuid}</pathUuid>
+							<pathConcept>
+								<uuid>${import.path.uuid}</uuid>
+								<description>${import.path.description}</description>
+							</pathConcept>
 						</configuration>
 					</execution>
 
