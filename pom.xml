@@ -16,8 +16,8 @@
 
 	<properties>
 		<sourceData.version>3.4-prod-2.1</sourceData.version>
-		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.30</org.ihtsdo.wb-toolkit.version>
-		<data.relativeInputDir>/SnomedCT_Release_US1000161_20140131/RF2Release/Full/</data.relativeInputDir>
+		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.32</org.ihtsdo.wb-toolkit.version>
+		<data.relativeInputDir>/SnomedCT_Release_US1000161_20150731/RF2Release/Full/</data.relativeInputDir>
 		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->
 		<import.path.description>VHA Extension 2015-05-31</import.path.description>  
 		<!--import.path.uuid>54f51020-ad78-5218-b5af-0e85a747f2a1</import.path.uuid--> <!-- "JIF Terminology Workbench release candidate path" -->
@@ -75,7 +75,7 @@
 						</goals>
 						<configuration>
 							<targetSubDir>generated-resources/data</targetSubDir>
-							<effectiveDate>2015-08-01 00:00:00</effectiveDate>
+							<effectiveDate>2015-07-28 00:00:00</effectiveDate>
 							<rf2Dirs>
 								<rf2Dir>
 									<directoryName>${data.relativeInputDir}/Terminology</directoryName>
