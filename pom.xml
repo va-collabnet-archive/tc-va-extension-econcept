@@ -9,17 +9,17 @@
 	<groupId>gov.va.oia.terminology.converters</groupId>
 	<artifactId>va-extension-econcept</artifactId>
 	<!-- this should be set to ${sourceData.version}-loader-[version] but that doesn't appease the maven gods that know best.... -->
-	<version>3.4-prod-2.1-loader-1.0</version>
+	<version>4.1-SNAPSHOT-2.0-loader-1.0</version>
 	
 	<packaging>pom</packaging>
 	<name>va-extension-econcept</name>
 
 	<properties>
-		<sourceData.version>3.4-prod-2.1</sourceData.version>
-		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.32</org.ihtsdo.wb-toolkit.version>
+		<sourceData.version>4.1-SNAPSHOT</sourceData.version>
+		<org.ihtsdo.wb-toolkit.version>2.32-trek-no-jini-va-1.33-SNAPSHOT</org.ihtsdo.wb-toolkit.version>
 		<data.relativeInputDir>/SnomedCT_Release_US1000161_20150731/RF2Release/Full/</data.relativeInputDir>
-		<import.path.uuid>69f78dfe-44e6-5fc5-ab47-c60cb33190a4</import.path.uuid> <!-- "VHA Extension 2015-05-31" -->
-		<import.path.description>VHA Extension 2015-05-31</import.path.description>  
+		<import.path.uuid>d0175e96-ef86-5c3f-a9ed-e14993b478e9</import.path.uuid> 
+		<import.path.description>VHA Extension</import.path.description>   
 		<!--import.path.uuid>54f51020-ad78-5218-b5af-0e85a747f2a1</import.path.uuid--> <!-- "JIF Terminology Workbench release candidate path" -->
 		<!--import.path.description>JIF Terminology Workbench release candidate path</import.path.description-->
 		<import.module.uuid>fd8fe531-eda8-576f-b75b-79735529798e</import.module.uuid> <!-- VA maintained module (core metadata concept) -->
@@ -49,7 +49,7 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>gov.va.jif.all-va-sources-wb</groupId>
+									<groupId>gov.va.wb</groupId>
 									<artifactId>content-processing-rf2</artifactId>
 									<version>${sourceData.version}</version>
 									<classifier>release-files</classifier>
